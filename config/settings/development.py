@@ -5,7 +5,7 @@ import os
 DEBUG = True
 
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['localhost']
 
 
 DATABASES = {
@@ -25,9 +25,9 @@ DATABASES = {
         # You can set a `SECRET_KEY` on you development computer system.
         # Create a specific `SECRET_KEY` for development and use it in development only.
         # Create a specific `SECRET_KEY` for production and use it in production only.
-SECRET_KEY = "3)hq&x!awji5*(iw3ovzji^92as-nw57(m@7h#x^-c2wzu%qam"
+# SECRET_KEY = "3)hq&x!awji5*(iw3ovzji^92as-nw57(m@7h#x^-c2wzu%qam"
 # **OR**
-# SECRET_KEY = os.environ.get('SECRET_KEY')
+SECRET_KEY = os.environ.get('SECRET_KEY')
 
 # To create a new `SECRET_KEY`:
 """

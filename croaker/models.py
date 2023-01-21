@@ -45,6 +45,44 @@ class Profile(models.Model):
         return 'Profile: ' + str(self.id) + ' - ' + self.user.username
 
 
+class Croak(models.Model):
+    """
+    Model for a `Croak`.
+    """
+    user = models.ForeignKey(
+        # `AUTH_USER_MODEL` is used to specify that each `Croak` is associated
+        # with a specific user.
+        AUTH_USER_MODEL,
+        # `on_delete` is used to specify what happens to this `Croak`
+        # if the specific user `AUTH_USER_MODEL` is deleted.
+        on_delete=models.DO_NOTHING,
+        # A user can have many `Croak`s, so we use `related_name` of `croaks`.
+        related_name='croaks',
+    )
+    tiny_body = models.CharField(
+        # Use `max_length` of `143` since a numerical interpretation of `143` can be "I love you".
+        max_length=143,
+    )
+    # `date_created` is automatically set to the current date and time
+    # when the `Croak` is created.
+    date_created = models.DateTimeField(
+        auto_now_add=True,
+    )
+
+    def __str__(self):
+        """
+        String representation of a `Croak`.
+        """
+        return (
+            self.user.username
+            + ' - '
+            + self.date_created.strftime('%Y-%m-%d %H:%M:%S')
+            + ' - '
+            + self.tiny_body[:21]
+            + "..."
+        )
+
+
 @receiver(post_save, sender=AUTH_USER_MODEL)
 def create_profile(sender, instance, created, **kwargs):
     """

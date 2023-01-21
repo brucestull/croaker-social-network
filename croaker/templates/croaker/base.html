@@ -14,6 +14,8 @@
     <body>
         <section class="hero is-small is-success mb-4">
             <div class="hero-body">
+                Greetings, {{ user.username }}!
+                |
                 <a href="{% url 'home' %}">Site Home</a>
                 |
                 <a href={% url 'croaker:dashboard' %}>Dashboard</a>

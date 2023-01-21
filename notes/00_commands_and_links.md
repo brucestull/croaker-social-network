@@ -47,6 +47,7 @@
 
 * Can't have leading `.\` when running command with `heroku run`:
   * `heroku run python manage.py createsuperuser --email admin@email.app --username admin`
+  * `heroku run python manage.py createsuperuser --email FlynntKnapp@email.app --username FlynntKnapp`
 * `heroku login`
 * `heroku create dezzi-diner`
 

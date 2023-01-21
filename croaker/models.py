@@ -29,8 +29,7 @@ class Profile(models.Model):
     follows = models.ManyToManyField(
         'self',
         symmetrical=False,
-        # `related_name` is used to access the `Profile`s who follow
-        # this `Profile`.
+        # `related_name`: This `Profile` is 'followed_by' the other `Profile`s.
         related_name='followed_by',
         blank=True,
         verbose_name='This user follows',

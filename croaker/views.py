@@ -1,13 +1,41 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 
-from croaker.models import Profile
+from croaker.forms import CroakForm
+from croaker.models import Profile, Croak
 
 
 def dashboard(request):
     """
     Dashboard view for the Croaker app.
+
+    User can create a new 'Croak' here.
     """
-    return render(request, 'croaker/home.html')
+    # Create a 'bound' form object from user input, or create a blank form.
+    form = CroakForm(request.POST or None)
+    # If the user clicked the `Croak!` button:
+    if request.method == "POST":
+        # Get the form data from the request
+        # If the form is valid:
+        if form.is_valid():
+            # Create a temporary `Croak` object 'new_croak'.
+            new_croak = form.save(commit=False)
+            # Set the `user` attribute of the `Croak` object to the current user.
+            new_croak.user = request.user
+            # Save the new (and modified) `Croak` object to the database.
+            new_croak.save()
+            # Redirect the user to the `dashboard` view.
+            return redirect('croaker:dashboard')
+    # `followed_croaks` includes all the `Croak`s from the `Profile`s
+    # that the current user's `Profile` follows.
+    followed_croaks = Croak.objects.filter(
+        user__profile__in=request.user.profile.follows.all()
+    ).order_by('-date_created')
+    # Render the `dashboard.html` template, which includes the blank form.
+    context = {
+        'form': form,
+        'followed_croaks': followed_croaks,
+    }
+    return render(request, 'croaker/dashboard.html', context)
 
 
 def profile_list(request):

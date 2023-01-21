@@ -1,4 +1,6 @@
 from django.db import models
+from django.db.models.signals import post_save
+from django.dispatch import receiver
 
 from config.settings.common import AUTH_USER_MODEL
 
@@ -40,4 +42,20 @@ class Profile(models.Model):
         """
         String representation of a `Profile`.
         """
-        return str(self.id) + ' - ' + self.user.username
+        return 'Profile: ' + str(self.id) + ' - ' + self.user.username
+
+
+@receiver(post_save, sender=AUTH_USER_MODEL)
+def create_profile(sender, instance, created, **kwargs):
+    """
+    Create a `Profile` for a `CustomUser` when the `CustomUser` is created.
+    """
+    if created:
+        # Create a new profile for the user.
+        user_profile = Profile(user=instance)
+        # Save the newe profile to the database.
+        user_profile.save()
+        # Add the user's profile to the list of profiles they follow.
+        user_profile.follows.add(instance.profile)
+        # Save changes to the profile to the database.
+        user_profile.save()

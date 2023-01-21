@@ -3,6 +3,11 @@ from django.contrib.auth.admin import UserAdmin
 
 from accounts.forms import CustomUserCreationForm, CustomUserChangeForm
 from accounts.models import CustomUser
+from croaker.models import Profile
+
+
+class ProfileInline(admin.StackedInline):
+    model = Profile
 
 
 @admin.register(CustomUser)
@@ -14,3 +19,6 @@ class CustomUserAdmin(UserAdmin):
         'username',
         'email'
     )
+    inlines = [
+        ProfileInline,
+    ]

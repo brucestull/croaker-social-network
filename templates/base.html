@@ -15,6 +15,12 @@
                     >
                     Croaker Social Network - GitHub Repository
                 </a>
+                <br>
+                <a
+                    href={% url 'croaker:dashboard' %}
+                    >
+                    Croaker - Dashboard
+                </a>
                 {% if user.is_staff %}
                     {% include 'staff.html' %}
                 {% endif %}

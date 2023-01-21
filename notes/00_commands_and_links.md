@@ -1,5 +1,20 @@
 # Useful Commands and Links
 
+## Production deployment links
+
+* Dashboard:
+* Server Root:
+  * <https://croaker-social-network.herokuapp.com/>
+* Create user:
+* Django Admin:
+* Django Admin Documentation:
+
+## Development Links
+
+* <http://localhost:8000/>
+* <http://localhost:8000/croaker/>
+* <http://localhost:8000/croaker/dashboard/>
+
 ## Commands
 
 ### This Project
@@ -62,14 +77,6 @@
 ### Git
 
 * `git remote -v`
-
-## Production deployment links
-
-* Dashboard:
-* Server Root:
-* Create user:
-* Django Admin:
-* Django Admin Documentation:
 
 ## Development server web links
 

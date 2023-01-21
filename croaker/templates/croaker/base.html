@@ -15,6 +15,10 @@
         <section class="hero is-small is-success mb-4">
             <div class="hero-body">
                 <a href="{% url 'home' %}">Site Home</a>
+                |
+                <a href={% url 'croaker:dashboard' %}>Dashboard</a>
+                |
+                <a href={% url 'croaker:profile-list' %}>Profiles</a>
                 <h1 class="title is-1">Croaker</h1>
                 <p class="subtitle is-4">
                     A raspy social network built with Django

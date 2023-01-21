@@ -34,6 +34,7 @@ INSTALLED_APPS = [
     'django.contrib.admindocs',
 
     'accounts.apps.UsersConfig',
+    'croaker.apps.CroakerConfig',
 ]
 
 MIDDLEWARE = [

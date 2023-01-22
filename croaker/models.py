@@ -41,7 +41,7 @@ class Profile(models.Model):
         """
         String representation of a `Profile`.
         """
-        return 'Profile: ' + str(self.id) + ' - ' + self.user.username
+        return self.user.username
 
 
 class Croak(models.Model):

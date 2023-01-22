@@ -3,20 +3,24 @@
 {% block title %}{{ user.username }} - Dashboard{% endblock title %}
 
 {% block content %}
+
     <div class="column">
-        {% for followed in user.profile.follows.all %}
-            {% for croak in followed.user.croaks.all %}
-                <div class="box">
-                    {{ croak.tiny_body }}
-                    <span class="is-small has-text-grey-light">
-                        (
-                            {{ croak.date_created }}
-                            -
-                            {{ croak.user.username }}
-                        )
-                    </span>
-                </div>
-            {% endfor %}
+        {% for croak in followed_croaks %}
+            <div class="box">
+                {{ croak.tiny_body }}
+                <span class="is-small has-text-grey-light">
+                    (
+                        {{ croak.date_created }}
+                        -
+                        <a
+                            href={% url 'croaker:profile-detail' croak.user.profile.id %}
+                            class="is-small has-text-grey-light"
+                            >
+                        {{ croak.user.username }}
+                        </a>
+                    )
+                </span>
+            </div>
         {% endfor %}
     </div>
 
